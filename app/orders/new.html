@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-lg-4 center-block">
+    <form ng-submit="create()">
+      <div class="form-group">
+        <label for="email">Empresa</label>
+        <select class="form-control">
+          <option>Hiper Bom</option>
+          <option>Coca-cola</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="pwd">Produto</label>
+        <input type="text" class="form-control" id="product" placeholder="Buscar produto...">
+      </div>
+    </form>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Lista de Compras</div>
+      <table class="table">
+        <tr>
+          <th>Nome do Produto</th>
+          <th>Quant</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>Ovos da Páscoa</td>
+          <td>30</td>
+          <td>
+            <button type="button" class="close" aria-label="Deletar"><span aria-hidden="true">&times;</span></button>
+          </td>
+        </tr>
+        <tr>
+          <td>Panetone</td>
+          <td>10</td>
+          <td>
+            <button type="button" class="close" aria-label="Deletar"><span aria-hidden="true">&times;</span></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>
