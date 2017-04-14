@@ -12,7 +12,7 @@ angular.module('testaller', [
   'ui.bootstrap'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.html5Mode(true);
+  $locationProvider.hashPrefix('!');
 
   $routeProvider.otherwise({redirectTo: '/home'});
 }]);
