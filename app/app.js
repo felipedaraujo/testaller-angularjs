@@ -9,9 +9,11 @@ angular.module('testaller', [
   'testaller.orders',
   'testaller.users',
   'testaller.version',
-  'ui.bootstrap'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+  'ui.bootstrap',
+  'ngStorage'
+])
+.constant('API_URL', 'http://testaller-rails.herokuapp.com')
+.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
   $routeProvider.otherwise({redirectTo: '/home'});
