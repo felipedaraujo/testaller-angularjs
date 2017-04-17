@@ -12,7 +12,7 @@ angular.module('testaller', [
   'ui.bootstrap',
   'ngStorage'
 ])
-.constant('API_URL', 'http://testaller-rails.herokuapp.com')
+.constant('API_URL', 'https://testaller-rails.herokuapp.com')
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
