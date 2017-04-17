@@ -21,12 +21,12 @@ angular.module('testaller.signin', ['ngRoute'])
     $http.post(API_URL + '/auth/signin', {
       email: email,
       password: password
-    }).success(function(response) {
+    }).then(function(response) {
       if(reponse.auth_token) {
         $localStorage.auth_token = response.auth_token;
         $location.path('/home');
       } else {
-        $scope.error.message = {};
+        $scope.error.message = response.message;
         $scope.loading = false;
       }
     });

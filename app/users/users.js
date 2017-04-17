@@ -21,19 +21,18 @@ angular.module('testaller.users', ['ngRoute'])
 
   $scope.signup = function(email, password, password_confirmation) {
     $scope.loading = true;
+    $scope.error   = {};
 
     $http.post(API_URL + '/signup', {
       email: email,
       password: password,
       password_confirmation: password_confirmation
-    }).success(function(response) {
-      if(reponse.auth_token) {
-        $localStorage.auth_token = response.auth_token;
-        $location.path('/home');
-      } else {
-        $scope.error.message = {};
-        $scope.loading = false;
-      }
+    }).then(function(response) {
+      $localStorage.auth_token = response.data.auth_token;
+      $location.path('/home');
+    }, function(error) {
+      $scope.error.message = error.data.message;
+      $scope.loading = false;
     });
   };
 }])
