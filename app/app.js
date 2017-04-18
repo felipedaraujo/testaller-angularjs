@@ -15,7 +15,7 @@ angular.module('testaller', [
   'angular-jwt',
   'ui.utils.masks'
 ])
-.constant('API_URL', 'http://127.0.0.1:3000')
+.constant('API_URL', 'https://testaller-rails.herokuapp.com')
 .run(['authManager', function(authManager) {
   authManager.checkAuthOnRefresh();
   authManager.redirectWhenUnauthenticated();
