@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row" ng-init="init()">
   <div class="col-xs-12 col-sm-10 col-lg-6 center-block">
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-show="companies.length">
       <div class="panel-heading">Lista de Empresas</div>
       <table class="table">
         <tr>
@@ -8,12 +8,21 @@
           <th>CNPJ</th>
           <th>Total Pedidos</th>
         </tr>
-        <tr>
-          <td>Taller Web Solutions</td>
-          <td>34.763.818/0001-88</td>
-          <td>10</td>
+        <tr ng-repeat="company in companies">
+          <td>{{company.name}}</td>
+          <td>{{company.cnpj}}</td>
+          <td>{{company.total_orders}}</td>
         </tr>
       </table>
+    </div>
+
+    <div class="panel panel-default" ng-hide="companies.length">
+      <div class="panel-body text-center">
+        <p class="lead">Você ainda não tem empresas cadastras</p>
+        <a href="#!/companies/new" class="btn btn-primary btn-lg">
+          Cadastrar Empresa Agora
+        </a>
+      </div>
     </div>
   </div>
 </div>

@@ -23,10 +23,15 @@ angular.module('testaller.users', ['ngRoute'])
     $scope.loading = true;
     $scope.error   = {};
 
-    $http.post(API_URL + '/signup', {
-      email: email,
-      password: password,
-      password_confirmation: password_confirmation
+    $http({
+      url: API_URL + '/signup',
+      skipAuthorization: true,
+      method: 'POST',
+      data: {
+        email: email,
+        password: password,
+        password_confirmation: password_confirmation
+      }
     }).then(function(response) {
       $localStorage.auth_token = response.data.auth_token;
       $location.path('/home');

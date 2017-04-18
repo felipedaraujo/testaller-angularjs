@@ -9,8 +9,8 @@ angular.module('testaller.signin', ['ngRoute'])
   });
 }])
 
-.controller('SigninCtrl', ['$scope', '$http', '$location', '$localStorage', 'API_URL',
-                          function($scope, $http, $location, $localStorage, API_URL) {
+.controller('SigninCtrl', ['$scope', '$http', '$location', '$localStorage', 'authManager', 'API_URL',
+                          function($scope, $http, $location, $localStorage, authManager, API_URL) {
 
   $scope.loading = false;
   $scope.error   = {};
@@ -18,12 +18,19 @@ angular.module('testaller.signin', ['ngRoute'])
   $scope.signin = function(email, password) {
     $scope.loading = true;
 
-    $http.post(API_URL + '/auth/signin', {
-      email: email,
-      password: password
+    $http({
+      url: API_URL + '/auth/signin',
+      skipAuthorization: true,
+      method: 'POST',
+      data: {
+        email: email,
+        password: password
+      }
     }).then(function(response) {
-      if(reponse.auth_token) {
-        $localStorage.auth_token = response.auth_token;
+      if(response.data.auth_token) {
+        authManager.authenticate();
+        
+        $localStorage.auth_token = response.data.auth_token;
         $location.path('/home');
       } else {
         $scope.error.message = response.message;

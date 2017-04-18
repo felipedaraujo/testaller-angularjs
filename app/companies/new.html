@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-lg-4 center-block">
-    <form ng-submit="create()">
+    <form ng-submit="create(name, cnpj)">
       <div class="form-group">
         <label for="email">Nome Fantasia</label>
-        <input type="email" class="form-control" id="email">
+        <input type="text" class="form-control" ng-model="name" maxlength="255"required>
       </div>
       <div class="form-group">
         <label for="pwd">CNPJ</label>
-        <input type="password" class="form-control" id="pwd">
+        <input type="text" class="form-control" ng-model="cnpj" ui-br-cnpj-mask required>
       </div>
       <button type="submit" class="btn btn-primary btn-block">Criar</button>
       <a href="#!/home" class="btn btn-default btn-block">Cancelar</a>
