@@ -24,7 +24,7 @@ angular.module('testaller.users', ['ngRoute'])
     $scope.error   = {};
 
     $http({
-      url: API_URL + '/signup',
+      url: API_URL + '/users',
       skipAuthorization: true,
       method: 'POST',
       data: {
