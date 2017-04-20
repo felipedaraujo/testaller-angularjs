@@ -17,19 +17,19 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body ng-controller="MainCtrl">
-  <div ng-include src="'shared/_menu.html'" ng-if="status.isAuthenticated"></div>
+  <div ng-include src="'shared/_menu.html'"></div>
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view class="container"></div>
+  <div ui-view class="container"></div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
   <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
   <script src="bower_components/ngstorage/ngStorage.min.js"></script>
   <script src="bower_components/angular-jwt/dist/angular-jwt.min.js"></script>

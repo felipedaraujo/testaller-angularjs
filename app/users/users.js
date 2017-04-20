@@ -1,17 +1,22 @@
 'use strict';
 
-angular.module('testaller.users', ['ngRoute'])
+angular.module('testaller.users', [])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider
-    .when('/signup', {
-      templateUrl: 'users/new.html',
-      controller: 'UsersNewCtrl'
+.config(['$stateProvider', function($stateProvider) {
+  $stateProvider
+    .state('app.users_new', {
+      url: '/signup',
+      controller: 'UsersNewCtrl',
+      templateUrl: 'users/new.html'
     })
-    .when('/users/:id', {
+    .state('app.users_edit', {
+      url: '/users/:id',
+      controller: 'UsersEditCtrl',
       templateUrl: 'users/edit.html',
-      controller: 'UsersEditCtrl'
-    });
+      data: {
+        requiresLogin: true
+      }
+     });
 }])
 
 .controller('UsersNewCtrl', ['$scope', '$http', '$location', '$localStorage', 'API_URL',
@@ -34,7 +39,7 @@ angular.module('testaller.users', ['ngRoute'])
       }
     }).then(function(response) {
       $localStorage.auth_token = response.data.auth_token;
-      $location.path('/home');
+      $location.path('/app/home');
     }, function(error) {
       $scope.error.message = error.data.message;
       $scope.loading = false;
@@ -43,7 +48,6 @@ angular.module('testaller.users', ['ngRoute'])
 }])
 
 .controller('UsersEditCtrl', ['$scope', function($scope) {
-  $scope.update = function($event) {
-    $location.path('/home');
+  $scope.update = function() {
   };
 }]);

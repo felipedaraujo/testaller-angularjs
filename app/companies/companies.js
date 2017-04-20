@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('testaller.companies', ['ngRoute'])
+angular.module('testaller.companies', [])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/companies/new', {
-    templateUrl: 'companies/new.html',
+.config(['$stateProvider', function($stateProvider) {
+  $stateProvider.state('app.companies_new', {
+    url: '/companies/new',
     controller: 'CompaniesNewCtrl',
+    templateUrl: 'companies/new.html',
     data: {
       requiresLogin: true
     }

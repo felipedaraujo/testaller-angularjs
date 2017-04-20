@@ -6,18 +6,18 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#!/home">Testaller</a>
+    <a class="navbar-brand" ui-sref="{{isAuthenticated() ? 'app.home' : 'app.signin'}}">Testaller</a>
   </div>
-  <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+  <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed" ng-if="isAuthenticated()">
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#!/home">Home</a></li>
-      <li><a href="#!/companies/new">Nova Empresa</a></li>
-      <li><a href="#!/orders/new">Novo Pedido</a></li>
+      <li><a ui-sref="app.home">Home</a></li>
+      <li><a ui-sref="app.companies_new">Nova Empresa</a></li>
+      <li><a ui-sref="app.orders_new">Novo Pedido</a></li>
 
       <li uib-dropdown on-toggle="toggled(open)">
         <a href id="simple-dropdown" uib-dropdown-toggle>Mais <span class="caret"></span></a>
         <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
-          <li><a href="#!/users/1">Minha Conta</a></li>
+          <li><a ui-sref="app.users_edit({id: 1})">Minha Conta</a></li>
           <li role="separator" class="divider"></li>
           <li><a ng-click="signout()">Sair</a></li>
         </ul>

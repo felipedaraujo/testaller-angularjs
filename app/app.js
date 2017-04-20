@@ -2,7 +2,7 @@
 
 // Declare app level module which depends on views, and components
 angular.module('testaller', [
-  'ngRoute',
+  'ui.router',
   'testaller.main',
   'testaller.signin',
   'testaller.home',
@@ -23,19 +23,19 @@ angular.module('testaller', [
 .run(['$http', '$localStorage', function($http, $localStorage) {
   $http.defaults.headers.common.Authorization = $localStorage.auth_token;
 }])
-.config(['$locationProvider', '$routeProvider', 'jwtOptionsProvider', '$httpProvider', '$localStorageProvider',
-        function($locationProvider, $routeProvider, jwtOptionsProvider, $httpProvider, $localStorageProvider) {
+.config(['$locationProvider', '$urlRouterProvider', 'jwtOptionsProvider', '$httpProvider', '$localStorageProvider',
+        function($locationProvider, $urlRouterProvider, jwtOptionsProvider, $httpProvider, $localStorageProvider) {
 
   $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/home'});
+  $urlRouterProvider.otherwise('/app/home');
 
   jwtOptionsProvider.config({
     tokenGetter: function() {
       return $localStorageProvider.get('auth_token');
     },
-    unauthenticatedRedirectPath: '/signin',
-    whiteListedDomains: ['https://testaller-rails.herokuapp.com', 'http://127.0.0.1:3000']
+    unauthenticatedRedirectPath: '/app/signin',
+    whiteListedDomains: ['testaller-rails.herokuapp.com', '127.0.0.1']
   });
 
   $httpProvider.interceptors.push('jwtInterceptor');

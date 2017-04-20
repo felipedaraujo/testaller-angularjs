@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('testaller.home', ['ngRoute'])
+angular.module('testaller.home', [])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/home', {
-    templateUrl: 'home/home.html',
+.config(['$stateProvider', function($stateProvider) {
+  $stateProvider.state('app.home', {
+    url: '/home',
     controller: 'HomeCtrl',
+    templateUrl: 'home/home.html',
     data: {
       requiresLogin: true
     }
