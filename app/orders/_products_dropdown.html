@@ -1,13 +1,22 @@
 <div class="custom-popup-wrapper"
    ng-style="{top: position().top+'px', left: position().left+'px'}"
    style="display: block;"
-   ng-show="isOpen() && !moveInProgress"
+   ng-show="$parent.isTypeaheadOpen() && !moveInProgress"
    aria-hidden="{{!isOpen()}}">
-  <p class="message">Selecione um prodto</p>
 
   <ul class="dropdown-menu" role="listbox">
-    <li class="uib-typeahead-match" ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
-      ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+    <li class="uib-typeahead-match"
+        ng-class="{active: isActive(-1) }"
+        ng-mouseenter="selectActive(-1)"
+        ng-click="$parent.createProduct($parent.product)" role="option">
+      <a href="" tabindex="-1"><strong>{{$parent.product | lowercase}}</strong> (adicionar novo)</a>
+    </li>
+
+    <li class="uib-typeahead-match"
+        ng-class="{active: isActive($index) }"
+        ng-repeat="match in matches track by $index"
+        ng-mouseenter="selectActive($index)"
+        ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
       <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
     </li>
   </ul>
