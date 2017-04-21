@@ -1,37 +1,44 @@
 <div class="row" ng-init="init()">
   <div class="col-xs-12 col-sm-6 col-lg-4 center-block">
-    <form ng-submit="create()">
-      <div class="form-group">
-        <label for="email">Empresa</label>
-        <select class="form-control" ng-model="company_id" ng-change="fetchProducts()" required>
-          <option ng-repeat="company in companies" value="{{company.id}}">{{company.name}}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="pwd">Produto</label>
-        <input type="text" ng-model="product_id" placeholder="Buscar produto.." uib-typeahead="product.id as product.name for product in products | filter:{name:$viewValue}" typeahead-popup-template-url="orders/_products_dropdown.html" class="form-control">
-      </div>
+    <div class="form-group">
+      <label for="email">Empresa</label>
+      <select class="form-control" ng-model="company_id" ng-change="fetchProducts()" required>
+        <option ng-repeat="company in companies" value="{{company.id}}">{{company.name}}</option>
+      </select>
+    </div>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">Lista de Compras</div>
-        <table class="table">
-          <tr>
-            <th>Nome do Produto</th>
-            <th>Quant</th>
-            <th></th>
-          </tr>
-          <tr ng-repeat="item in items">
-            <td>{{item.name}}</td>
-            <td>{{item.quantity}}</td>
-            <td>
-              <button type="button" class="close" aria-label="Deletar" ng-click="remove()"><span aria-hidden="true">&times;</span></button>
-            </td>
-          </tr>
-        </table>
-      </div>
+    <div class="form-group typeahead-demo">
+      <label for="product">Produto</label>
+      <input class="form-control" type="text"
+             ng-model="product"
+             ng-disabled="!company_id"
+             placeholder="Buscar produto.."
+             typeahead-on-select="addItem($item, $model)"
+             typeahead-popup-template-url="orders/_products_dropdown.html"
+             uib-typeahead="product as product.name for product in products | filter:{name:$viewValue}">
+    </div>
 
-      <button type="submit" class="btn btn-primary btn-block">Criar</button>
-      <a href="#!/home" class="btn btn-default btn-block">Cancelar</a>
-    </form>
+    <div class="panel panel-default">
+      <div class="panel-heading">Lista de Compras</div>
+      <table class="table">
+        <tr>
+          <th>Nome do Produto</th>
+          <th>Quant</th>
+          <th></th>
+        </tr>
+        <tr ng-repeat="item in items">
+          <td>{{item.name}}</td>
+          <td>{{item.quantity}}</td>
+          <td>
+            <button type="button" class="close" aria-label="Deletar" ng-click="removeItem(item)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <button type="button" class="btn btn-primary btn-block" ng-click="createOrder()">Enviar Pedido</button>
+    <a href="#!/home" class="btn btn-default btn-block">Cancelar</a>
   </div>
 </div>
