@@ -22,8 +22,8 @@ angular.module('testaller.users', [])
      });
 }])
 
-.controller('UsersNewCtrl', ['$scope', '$http', '$location', '$localStorage', 'API_URL',
-                            function($scope, $http, $location, $localStorage, API_URL) {
+.controller('UsersNewCtrl', ['$scope', '$http', '$window', '$localStorage', 'API_URL', '$timeout',
+                            function($scope, $http, $window, $localStorage, API_URL, $timeout) {
   $scope.loading = false;
   $scope.error   = {};
 
@@ -42,7 +42,10 @@ angular.module('testaller.users', [])
       }
     }).then(function(response) {
       $localStorage.auth_token = response.data.auth_token;
-      $location.path('/app/home');
+
+      $timeout(function(){
+        $window.location.href = '/#!/app/home';
+      }, 1000);
     }, error => {
       $scope.error.message = error.data.message;
       $scope.loading = false;
