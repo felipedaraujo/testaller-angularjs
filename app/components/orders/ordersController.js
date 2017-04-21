@@ -133,7 +133,7 @@ angular.module('testaller.orders', [])
     if($scope.products.length <= 0) {
       erroMensagemNewOrder();
       return
-    }      
+    }
 
     const products = $scope.items.map(item =>
       ({ id: item.id, quantity: item.quantity })
@@ -177,6 +177,20 @@ angular.module('testaller.orders', [])
   };
 
   $scope.isTypeaheadOpen = () => $scope.product !== '' ? true : false;
+
+  $scope.incriseProduct = (product) => {
+    let orderItem = $scope.items.find(i => i.name === product.name);
+    orderItem.quantity++;
+  }
+
+  $scope.decriseProduct = (product) => {
+    let orderItem = $scope.items.find(i => i.name === product.name);
+    if(orderItem.quantity === 1) {
+      $scope.removeItem(product);
+    } else {
+      orderItem.quantity--;
+    }
+  }
 
   var cleanProductQuery = () => $scope.product = '';
 

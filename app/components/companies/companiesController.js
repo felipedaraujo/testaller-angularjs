@@ -48,8 +48,8 @@ angular.module('testaller.companies', [])
   };
 }])
 
-.controller('CompaniesNewCtrl', ['$scope', '$http', '$location', 'API_URL',
-                                function($scope, $http, $location, API_URL) {
+.controller('CompaniesNewCtrl', ['$scope', '$http', '$state', 'API_URL',
+                                function($scope, $http, $state, API_URL) {
   $scope.error = {};
   $scope.loading = false;
 
@@ -65,7 +65,7 @@ angular.module('testaller.companies', [])
       }
     }).then(() => {
       $scope.loading = false;
-      $location.path('/home');
+      $state.go('app.home');
     }, error => {
       $scope.loading = false;
       $scope.error.message = error.data.message;

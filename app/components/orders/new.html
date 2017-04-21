@@ -35,7 +35,15 @@
         </tr>
         <tr ng-repeat="item in items">
           <td>{{item.name}}</td>
-          <td>{{item.quantity}}</td>
+          <td>
+              {{item.quantity}}
+              <button type="button" class="btn btn-default" ng-click="incriseProduct(item)">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </button>
+              <button type="button" class="btn btn-default" ng-click="decriseProduct(item)">
+                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+              </button>
+          </td>
           <td>
             <button type="button" class="close" aria-label="Deletar" ng-click="removeItem(item)">
               <span aria-hidden="true">&times;</span>
