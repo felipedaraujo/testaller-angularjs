@@ -7,14 +7,17 @@ angular.module('testaller.users', [])
     .state('app.users_new', {
       url: '/signup',
       controller: 'UsersNewCtrl',
-      templateUrl: 'users/new.html'
+      templateUrl: 'components/users/new.html'
     })
     .state('app.users_edit', {
       url: '/users/:id',
       controller: 'UsersEditCtrl',
-      templateUrl: 'users/edit.html',
+      templateUrl: 'components/users/edit.html',
       data: {
         requiresLogin: true
+      },
+      resolve: {
+        currentUser: UserService => UserService.getUser()
       }
      });
 }])

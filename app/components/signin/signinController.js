@@ -6,7 +6,7 @@ angular.module('testaller.signin', [])
   $stateProvider.state('app.signin', {
     url: '/signin',
     controller: 'SigninCtrl',
-    templateUrl: 'signin/signin.html'
+    templateUrl: 'components/signin/signin.html'
   });
 }])
 
