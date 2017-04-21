@@ -50,7 +50,11 @@ angular.module('testaller.users', [])
   };
 }])
 
-.controller('UsersEditCtrl', ['$scope', function($scope) {
+.controller('UsersEditCtrl', ['$scope', '$http', 'currentUser', 'API_URL',
+                              function($scope, $http, currentUser, API_URL) {
+  $scope.email = currentUser.email;
+
   $scope.update = function() {
+
   };
 }]);

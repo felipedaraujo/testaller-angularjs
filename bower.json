@@ -15,5 +15,8 @@
     "ngstorage": "^0.3.11",
     "angular-input-masks": "^2.5.0",
     "angular-ui-router": "^0.4.2"
+  },
+  "resolutions": {
+    "angular": "1.6.4"
   }
 }

@@ -20,11 +20,9 @@ angular.module('testaller.main', [])
   $scope.loading = false;
   $scope.isNavCollapsed = true;
 
-  $scope.isAuthenticated = function() {
-    return authManager.isAuthenticated();
-  };
+  $scope.isAuthenticated = () => authManager.isAuthenticated();
 
-  $scope.signin = function(email, password) {
+  $scope.signin = (email, password) => {
     $scope.loading = true;
 
     $http({
@@ -35,27 +33,23 @@ angular.module('testaller.main', [])
         email: email,
         password: password
       }
-    }).then(function(response) {
-      if(response.data.auth_token) {
-        $localStorage.auth_token = response.data.auth_token;
+    }).then(response => {
+      $localStorage.auth_token = response.data.auth_token;
 
-        // timeout a seguir evita que a aplicação tente navegar para home antes
-        // que angular-jwt faça a autenticação da aplicação
-        $timeout(function(){
-          $window.location.href = '/#!/app/home';
-        }, 1000);
-      } else {
-        $scope.error.message = response.message;
-        $scope.loading = false;
-      }
+      // timeout a seguir evita que a aplicação tente navegar para home antes
+      // que angular-jwt faça a autenticação da aplicação
+      $timeout(function(){
+        $window.location.href = '/#!/app/home';
+      }, 1000);
+    }, error => {
+      $scope.loading = false;
+      $scope.error.message = error.data.message;
     });
   };
 
-  $scope.signout = function() {
+  $scope.signout = () => {
     delete $localStorage.auth_token;
 
-    $timeout(function(){
-      $window.location.href = '/#!/app/signin';
-    }, 1000);
+    $timeout(() => $window.location.href = '/#!/app/signin', 1000);
   };
 }]);

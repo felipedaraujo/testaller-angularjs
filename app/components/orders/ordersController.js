@@ -28,8 +28,8 @@ angular.module('testaller.orders', [])
 
 .controller('OrdersIndexCtrl', ['$scope', '$stateParams', '$http', '$location', 'API_URL',
                                 function($scope, $stateParams, $http, $location, API_URL) {
-  $scope.loading = false;
   $scope.error = {};
+  $scope.loading = false;
 
   $scope.cnpj = $stateParams.cnpj;
   $scope.order_id = $stateParams.order_id;
@@ -76,11 +76,16 @@ angular.module('testaller.orders', [])
   }
 }])
 
-.controller('OrdersNewCtrl', ['$scope', '$http', 'API_URL', 'currentUser', '$state',
-                        function($scope, $http, API_URL, currentUser, $state) {
+.controller('OrdersNewCtrl', ['$scope', '$http', 'API_URL', '$state',
+                        function($scope, $http, API_URL, $state) {
+
+  $scope.error = {};
+  $scope.loading = false;
+
   $scope.init = () => {
     $scope.items = [];
     $scope.product = '';
+    $scope.products = [];
     $scope.fetchCompanies();
   };
 
@@ -125,6 +130,11 @@ angular.module('testaller.orders', [])
   }
 
   $scope.createOrder = () => {
+    if($scope.products.length <= 0) {
+      erroMensagemNewOrder();
+      return
+    }      
+
     const products = $scope.items.map(item =>
       ({ id: item.id, quantity: item.quantity })
     );
@@ -174,4 +184,8 @@ angular.module('testaller.orders', [])
     $scope.loading = false;
     $scope.error.message = error.data.message;
   }
+
+  var erroMensagemNewOrder = () => {
+    fail({data: {message: "Pedido deve conter pelo menos 1 produto"}})
+  };
 }]);

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-lg-4 center-block">
-    <form ng-submit="signup(email, password, password_confirmation)">
+    <form name="userForm" ng-submit="signup(email, password, password_confirmation)" novalidate>
       <div ng-include src="'components/users/_form.html'"></div>
       <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
       <a ui-sref="app.signin" class="btn btn-link btn-block">Já tenho uma conta!</a>

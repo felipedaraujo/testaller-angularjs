@@ -1,6 +1,12 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-lg-4 center-block">
-    <form ng-submit="create(name, cnpj)">
+    <div class="alert alert-danger" role="alert" ng-show="error.message">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {{error.message}}
+    </div>
+
+    <form ng-submit="create(name, cnpj)" novalidate>
       <div class="form-group">
         <label for="email">Nome Fantasia</label>
         <input type="text" class="form-control" ng-model="name" maxlength="255"required>

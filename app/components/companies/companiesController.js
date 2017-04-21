@@ -24,11 +24,15 @@ angular.module('testaller.companies', [])
 
 .controller('CompaniesIndexCtrl', ['$scope', '$http', 'API_URL',
                         function($scope, $http, API_URL) {
+  $scope.error = {}
+  $scope.loading = false;
+
   $scope.init = function() {
     $scope.fetchCompanies();
   };
 
   $scope.fetchCompanies = function() {
+    $scope.error = {}
     $scope.loading = true;
 
     $http({
@@ -46,8 +50,8 @@ angular.module('testaller.companies', [])
 
 .controller('CompaniesNewCtrl', ['$scope', '$http', '$location', 'API_URL',
                                 function($scope, $http, $location, API_URL) {
-  $scope.loading = false;
   $scope.error = {};
+  $scope.loading = false;
 
   $scope.create = (name, cnpj) => {
     $scope.loading = true;
