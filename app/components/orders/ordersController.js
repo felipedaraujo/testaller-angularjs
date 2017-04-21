@@ -29,8 +29,6 @@ angular.module('testaller.orders', [])
 .controller('OrdersIndexCtrl', ['$scope', '$stateParams', '$http', '$location', 'API_URL',
                                 function($scope, $stateParams, $http, $location, API_URL) {
   $scope.error = {};
-  $scope.loading = false;
-
   $scope.cnpj = $stateParams.cnpj;
   $scope.order_id = $stateParams.order_id;
 
@@ -39,8 +37,6 @@ angular.module('testaller.orders', [])
   };
 
   $scope.fetchOrders = () => {
-    $scope.loading = true;
-
     $http({
       url: API_URL + '/orders',
       method: 'GET',
@@ -48,39 +44,34 @@ angular.module('testaller.orders', [])
         cnpj: $scope.cnpj,
         id: $scope.order_id
       }
-    }).then(response => {
-      $scope.loading = false;
-      $scope.orders = response.data;
-    }, error => fail(error));
+    }).then(
+      response => $scope.orders = response.data,
+      error => fail(error)
+    );
   };
 
   // TODO: verificar porque a requisição para atualizar um pedido retorna 404
   $scope.updateOrder = (order, status) => {
-    $scope.loading = true;
-
     $http({
       url: API_URL + '/orders/' + order.id,
       method: 'PUT',
       data: {
         status: status
       }
-    }).then(() => {
-      $scope.loading = false;
-    }, error => fail(error));
+    }).then(
+      () => {},
+      error => fail(error)
+    );
   };
 
 
-  var fail = error => {
-    $scope.loading = false;
-    $scope.error.message = error.data.message;
-  }
+  var fail = error => $scope.error.message = error.data.message;
 }])
 
 .controller('OrdersNewCtrl', ['$scope', '$http', 'API_URL', '$state',
                         function($scope, $http, API_URL, $state) {
 
   $scope.error = {};
-  $scope.loading = false;
 
   $scope.init = () => {
     $scope.items = [];
@@ -90,32 +81,26 @@ angular.module('testaller.orders', [])
   };
 
   $scope.fetchCompanies = () => {
-    $scope.loading = true;
-
     $http({
       url: API_URL + '/companies',
       method: 'GET',
-    }).then(response => {
-      $scope.loading = false;
-      $scope.companies = response.data;
-    }, error => fail(error));
+    }).then(
+      response => $scope.companies = response.data,
+      error => fail(error)
+    );
   };
 
   $scope.fetchProducts = () => {
-    $scope.loading = true;
-
     $http({
       url: API_URL + '/companies/' + $scope.company_id + '/products',
       method: 'GET',
-    }).then(response => {
-      $scope.loading = false;
-      $scope.products = response.data;
-    }, error => fail(error));
+    }).then(
+      response => $scope.products = response.data,
+      error => fail(error)
+    );
   };
 
   $scope.createProduct = (query) => {
-    $scope.loading = true;
-
     $http({
       url: API_URL + '/companies/' + $scope.company_id + '/products',
       method: 'POST',
@@ -123,7 +108,6 @@ angular.module('testaller.orders', [])
         name: query.toLowerCase()
       }
     }).then(response => {
-      $scope.loading = false;
       $scope.products.push(response.data);
       $scope.addItem(null, response.data);
     }, error => fail(error));
@@ -145,10 +129,10 @@ angular.module('testaller.orders', [])
       data: {
         products: products
       }
-    }).then(() => {
-      $scope.loading = false;
-      $state.go('app.home');
-    }, error => fail(error));
+    }).then(
+      () => $state.go('app.home'),
+      error => fail(error)
+    );
   };
 
   $scope.addItem = (_, product) => {
@@ -194,10 +178,7 @@ angular.module('testaller.orders', [])
 
   var cleanProductQuery = () => $scope.product = '';
 
-  var fail = error => {
-    $scope.loading = false;
-    $scope.error.message = error.data.message;
-  }
+  var fail = error => $scope.error.message = error.data.message;
 
   var erroMensagemNewOrder = () => {
     fail({data: {message: "Pedido deve conter pelo menos 1 produto"}})

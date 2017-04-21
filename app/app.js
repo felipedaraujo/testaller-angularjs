@@ -13,7 +13,9 @@ angular.module('testaller', [
   'ui.bootstrap.typeahead',
   'ngStorage',
   'angular-jwt',
-  'ui.utils.masks'
+  'ui.utils.masks',
+  'angular-loading-bar',
+  'ngAnimate'
 ])
 .constant('API_URL', 'https://testaller-rails.herokuapp.com')
 // .constant('API_URL', 'http://127.0.0.1:3000')
@@ -24,10 +26,12 @@ angular.module('testaller', [
 .run(['$http', '$localStorage', function($http, $localStorage) {
   $http.defaults.headers.common.Authorization = $localStorage.auth_token;
 }])
-.config(['$locationProvider', '$urlRouterProvider', 'jwtOptionsProvider', '$httpProvider', '$localStorageProvider',
-        function($locationProvider, $urlRouterProvider, jwtOptionsProvider, $httpProvider, $localStorageProvider) {
+.config(['$locationProvider', '$urlRouterProvider', 'jwtOptionsProvider', '$httpProvider', '$localStorageProvider', 'cfpLoadingBarProvider',
+        function($locationProvider, $urlRouterProvider, jwtOptionsProvider, $httpProvider, $localStorageProvider, cfpLoadingBarProvider) {
 
   $locationProvider.hashPrefix('!');
+
+  cfpLoadingBarProvider.includeSpinner = false;
 
   if ($localStorageProvider.get('auth_token')) {
     $urlRouterProvider.otherwise('/app/home');

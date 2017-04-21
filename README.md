@@ -15,4 +15,4 @@ Aqui estão algumas histórias que ficaram pendentes.
 * **Usuário**
   * - [ ] Como usuário, eu quero editar minhas informações, assim eu posso mudar email ou senha.
 * **Usabilidade**
-  * - [ ] Como usuário, eu quero saber quando o site está carregando algumas informação, assim eu sei que o sistema continua funcionando.
+  * - [X] Como usuário, eu quero saber quando o site está carregando algumas informação, assim eu sei que o sistema continua funcionando.

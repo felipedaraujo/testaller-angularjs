@@ -25,7 +25,6 @@ angular.module('testaller.companies', [])
 .controller('CompaniesIndexCtrl', ['$scope', '$http', 'API_URL',
                         function($scope, $http, API_URL) {
   $scope.error = {}
-  $scope.loading = false;
 
   $scope.init = function() {
     $scope.fetchCompanies();
@@ -33,29 +32,22 @@ angular.module('testaller.companies', [])
 
   $scope.fetchCompanies = function() {
     $scope.error = {}
-    $scope.loading = true;
 
     $http({
       url: API_URL + '/companies',
       method: 'GET',
-    }).then(response => {
-      $scope.loading = false;
-      $scope.companies = response.data;
-    }, error => {
-      $scope.loading = false;
-      $scope.error.message = error.data.message;
-    });
+    }).then(
+      response => $scope.companies = response.data,
+      error => $scope.error.message = error.data.message
+    );
   };
 }])
 
 .controller('CompaniesNewCtrl', ['$scope', '$http', '$state', 'API_URL',
                                 function($scope, $http, $state, API_URL) {
   $scope.error = {};
-  $scope.loading = false;
 
   $scope.create = (name, cnpj) => {
-    $scope.loading = true;
-
     $http({
       url: API_URL + '/companies',
       method: 'POST',
@@ -63,12 +55,9 @@ angular.module('testaller.companies', [])
         name: name,
         cnpj: cnpj
       }
-    }).then(() => {
-      $scope.loading = false;
-      $state.go('app.home');
-    }, error => {
-      $scope.loading = false;
-      $scope.error.message = error.data.message;
-    });
+    }).then(
+      () => $state.go('app.home'),
+      error => $scope.error.message = error.data.message
+    );
   };
 }]);

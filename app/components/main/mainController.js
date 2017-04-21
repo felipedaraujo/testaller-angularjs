@@ -17,14 +17,11 @@ angular.module('testaller.main', [])
                          $http, API_URL, $timeout) {
 
   $scope.error = {};
-  $scope.loading = false;
   $scope.isNavCollapsed = true;
 
   $scope.isAuthenticated = () => authManager.isAuthenticated();
 
   $scope.signin = (email, password) => {
-    $scope.loading = true;
-
     $http({
       url: API_URL + '/auth/signin',
       skipAuthorization: true,
@@ -35,14 +32,10 @@ angular.module('testaller.main', [])
       }
     }).then(response => {
       $localStorage.auth_token = response.data.auth_token;
-
       // timeout a seguir evita que a aplicação tente navegar para home antes
       // que angular-jwt faça a autenticação da aplicação
-      $timeout(function(){
-        $window.location.href = '/#!/app/home';
-      }, 1000);
+      $timeout(() => $window.location.href = '/#!/app/home', 1000);
     }, error => {
-      $scope.loading = false;
       $scope.error.message = error.data.message;
     });
   };
