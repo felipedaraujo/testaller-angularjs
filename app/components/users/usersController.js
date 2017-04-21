@@ -43,7 +43,7 @@ angular.module('testaller.users', [])
     }).then(function(response) {
       $localStorage.auth_token = response.data.auth_token;
       $location.path('/app/home');
-    }, function(error) {
+    }, error => {
       $scope.error.message = error.data.message;
       $scope.loading = false;
     });
@@ -55,6 +55,6 @@ angular.module('testaller.users', [])
   $scope.email = currentUser.email;
 
   $scope.update = function() {
-
+    // TODO: atualizar email e senha do usuário
   };
 }]);
