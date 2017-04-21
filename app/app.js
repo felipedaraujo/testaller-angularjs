@@ -28,7 +28,11 @@ angular.module('testaller', [
 
   $locationProvider.hashPrefix('!');
 
-  $urlRouterProvider.otherwise('/app/home');
+  if ($localStorageProvider.get('auth_token')) {
+    $urlRouterProvider.otherwise('/app/home');
+  } else {
+    $urlRouterProvider.otherwise('/app/signin');
+  }
 
   jwtOptionsProvider.config({
     tokenGetter: function() {
